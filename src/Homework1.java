@@ -4,19 +4,21 @@ import java.util.Stack;
 
 class Node{
     Node left, right ;
-    char c;
-    Node(char c){
+    Character c;
+    public Node(char c){
         this.c = c;
         left = null;
         right = null;
         
     }
-    
+    public String toString(){
+        return c.toString();
+    }
     
 }
 
 public class Homework1 {
-
+        public static Node root;
 	public static void main(String[] args) {
 		/*// Begin of arguments input sample
 		if (args.length > 0) {
@@ -34,15 +36,16 @@ public class Homework1 {
                 Homework1 boom = new Homework1();
                 String postfix = input.nextLine();
                 char[] c = postfix.replace(" ", "").toCharArray();
-                Node root = boom.tree(c);
-                
+                root = boom.tree(c);              
                 System.out.print("Output: ");
                 boom.infix(root);
                 System.out.print(" = ");
               System.out.println(calculate(root));
+              
+              TreeDEmo.main(args);
 	}
         
-        Node tree(char[] postfix){
+        public static Node tree(char[] postfix){
             Stack<Node> st = new Stack();
             Node r ,t1 ,t2 ;
             
@@ -72,7 +75,8 @@ public class Homework1 {
         }
         
         public static void infix(Node n){
-            if (n != null) {
+            if(n != root){
+                if (n != null) {
                 if (n.left != null && n.right != null) {  
                     System.out.print ("(");
                 }
@@ -82,7 +86,14 @@ public class Homework1 {
                 if (n.left != null && n.right != null) {  
                     System.out.print (")");
                 }
+                }
+            }else{
+                infix(n.left);
+                System.out.print(n.c);
+                infix(n.right);
             }
+                
+            
          }
         
         public static void inorder(Node n){
@@ -100,7 +111,7 @@ public class Homework1 {
             if (n.left == null && n.right == null)
                 return n.c - '0';
             else{
-                double result = 0;
+                double result;
                 double left = calculate(n.left);
                 double right = calculate(n.right);
                 char operator = n.c;
@@ -122,7 +133,7 @@ public class Homework1 {
             return c=='+' || c=='-' || c=='*' || c=='/';
         }
         
-        public static Node findMin(Node node){
+    /*    public static Node findMin(Node node){
             Node min = node;
             while(min.left != null){
                 min = min.left;
@@ -135,8 +146,8 @@ public class Homework1 {
             while(max.right != null){
                 max = max.right;
             }
-            return max;
+            return max; 
+        }*/
         
-    }
+        
 }
-
